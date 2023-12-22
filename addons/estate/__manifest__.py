@@ -1,12 +1,15 @@
 {
     'name': 'Real estate',
     'version': '13.0.0',
-    'summary': 'Test Module',
-    'author': 'My Company Ltd',
-    'website': 'https://www.mycompany.com',
+    'category': 'Hidden',
+    'description': "Real estate",
     'data': [
+        'security/ir.model.access.csv',
+        'views/estate_menus.xml',
+        'views/estate_property_views.xml',
     ],
+    'test': True,
     'installable': True,
-    'application': True,
-    'auto_install': False,
+    'auto_install': True,
+    'post_init_hook': 'post_init',
 }
