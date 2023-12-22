@@ -21,8 +21,8 @@ services:
       - "10014:8069"
       - "20014:8072" # live chat
     tty: true
-    command: --
-#    command: odoo scaffold /mnt/extra-addons/custom_module
+    command: --dev=all #enable to refresh
+  #  command: odoo scaffold /mnt/extra-addons/custom_module
     environment:
       - HOST=db
       - USER=odoo
