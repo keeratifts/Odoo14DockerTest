@@ -15,34 +15,46 @@
                             <field name="name"/>
                         </h1>
                         <field name="active" invisible="1"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
                     </div>
                     <group>
                         <group> 
+                            <field name="property_type_id"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
-                            <field name="state"/>
                         </group>
                         <group>
+                            <field name="best_offer"/>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
+                            <field name="state"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Description">
-                        <group col="2">
-                            <group>
-                                <!-- long text another line -->
-                                <field name="description" style="white-space: normal;word-break: break-word;"/>
-                                <field name="bedrooms"/>
-                                <field name="living_area"/>
-                                <field name="facades"/>
-                                <field name="garage"/>
-                                <field name="garden"/>
-                                <field name="garden_area"/>
-                                <field name="garden_orientation"/>
-
+                            <group col="2">
+                                <group>
+                                    <!-- long text another line -->
+                                    <field name="description" style="white-space: normal;word-break: break-word;"/>
+                                    <field name="bedrooms"/>
+                                    <field name="living_area"/>
+                                    <field name="facades"/>
+                                    <field name="garage"/>
+                                    <field name="garden"/>
+                                    <field name="garden_area"/>
+                                    <field name="garden_orientation"/>
+                                    <field name='total_area'/> 
+                                </group>
                             </group>
-                        </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids"/>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesperson_id"/>
+                                <field name="buyer_id"/>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
@@ -56,6 +68,7 @@
         <field name="arch" type="xml">
             <tree string="Property">
                 <field name = "name"/>
+                <field name = "property_type_id"/>
                 <field name = "postcode"/>
                 <field name = "bedrooms"/>
                 <field name = "living_area"/>
@@ -63,6 +76,7 @@
                 <field name = "selling_price"/>
                 <field name = "date_availability"/>
                 <field name = "state"/>
+                <field name="best_offer"/>
             </tree>
         </field>
     </record>
@@ -93,6 +107,7 @@
             <!-- &lt;= (less than or equal to) YYYY-MM-DD -->
             <filter string="Available" name="date_availability" domain="[('date_availability', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d')), ('state', '=', 'new')]"/>
             <group expand="1" string="Group By">
+                <filter string="Property Types" name="property_type_id" context="{'group_by':'property_type_id', 'residual_visible':True}"/>
                 <filter string="Postcode" name="postcode" context="{'group_by':'postcode', 'residual_visible':True}"/>
                 <filter string="Status" name="state" context="{'group_by':'state', 'residual_visible':True}"/>
             </group>
