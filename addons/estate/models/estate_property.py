@@ -47,5 +47,14 @@ class EstateProperty(models.Model):
 
     @api.depends("offer_ids.price")
     def _compute_display_best_offer(self):
-        for value in self:
-            value.best_offer = value.offer_ids.price
+        # print (self.offer_ids.mapped('price'))
+        self.best_offer = max(self.offer_ids.mapped('price')) #list every record from this element
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = "10"
+            self.garden_orientation = "north"
+        else:
+            self.garden_area = "0"
+            self.garden_orientation = ""
