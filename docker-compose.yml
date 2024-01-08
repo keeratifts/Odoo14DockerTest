@@ -21,7 +21,7 @@ services:
       - "10014:8069"
       - "20014:8072" # live chat
     tty: true
-    command: --dev=all #enable refresh xml
+    command: --dev=all -u estate #enable refresh xml
     environment:
       - HOST=db
       - USER=odoo

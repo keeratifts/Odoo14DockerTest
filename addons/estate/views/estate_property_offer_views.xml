@@ -7,8 +7,9 @@
         <field name="arch" type="xml">
             <form string="Properties" version = "v7">
                 <group>
+                    <field name="property_id"/>
                     <field name="price"/>
-                    <field name="buyer_id"/>
+                    <field name="partner_id"/>
                     <field name="status"/>
                     <field name="create_date"/>
                     <field name="validity"/>
@@ -24,7 +25,9 @@
         <field name="arch" type="xml">
             <tree string="Offer">
                 <field name="price"/>
-                <field name="buyer_id"/>
+                <field name="partner_id"/>
+                <button name="accept_button" type="object" string="Accept" icon="fa-check"/>
+                <button name="refuse_button" type="object" string="Refuse" icon="fa-times"/>
                 <field name="status"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
@@ -32,7 +35,7 @@
         </field>
     </record>
 
-    <!-- <record id="estate_property_offer_action" model="ir.actions.act_window">
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
         <field name="name">Property Offer</field>
         <field name="res_model">estate.property.offer</field>
         <field name="view_mode">tree,form</field>
@@ -41,6 +44,6 @@
                 Define a new estate property offer
             </p>
         </field>
-    </record> -->
+    </record>
 
 </odoo>
