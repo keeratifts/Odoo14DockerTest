@@ -7,8 +7,9 @@
         <field name="arch" type="xml">
             <form string="Properties" version = "v7">
                 <header>
-                    <button name="sold_button" type="object" string="SOLD"/>
+                    <button name="sold_button" type="object" string="SOLD" class="oe_highlight"/>
                     <button name="cancel_button" type="object" string="CANCEL"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer,accept,sold"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -19,7 +20,8 @@
                             <field name="name"/>
                         </h1>
                         <field name="active" invisible="1"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <!-- disable tag creation in the form view -->
+                        <field name="tag_ids" widget="many2many_tags" options="{'no_create': True, 'color_field': 'color'}"/>
                     </div>
                     <group>
                         <group> 
@@ -31,7 +33,6 @@
                             <field name="best_offer"/>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
-                            <field name="state"/>
                         </group>
                     </group>
                     <notebook>
