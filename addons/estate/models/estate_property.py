@@ -69,6 +69,13 @@ class EstateProperty(models.Model):
     #         else:
     #             record.state = "new"
 
+    @api.onchange("offer_ids")
+    def _onchange_state(self):
+        if len(self.offer_ids) > 0:
+            self.state = 'offer'
+        else:
+            self.state = 'new'
+
     @api.onchange("garden")
     def _onchange_garden(self):
         if self.garden:

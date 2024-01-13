@@ -20,6 +20,8 @@ class EstatePropertyOffer(models.Model):
     create_date = fields.Date(string = "Offer Date", copy=False, default=lambda self: datetime.now())
     date_deadline = fields.Date(string = "Offer Deadline", compute="_compute_deadline", inverse="_inverse_deadline")
 
+    property_type_id = fields.Many2one(related="property_id.property_type_id")
+
     _sql_contrasints = [
         ('positive_offer', 'CHECK(price >= 0)', 'An offer price must be strictly positive')
     ]
