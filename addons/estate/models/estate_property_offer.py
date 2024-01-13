@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from datetime import datetime, timedelta
 
@@ -26,6 +26,20 @@ class EstatePropertyOffer(models.Model):
         ('positive_offer', 'CHECK(price >= 0)', 'An offer price must be strictly positive')
     ]
     
+    # @api.model
+    # def create(self, vals):
+    #     for record in self:
+    #         offer = record.env['estate.property'].browse(vals['offer_ids'])
+    #         print (offer)
+    #         for ss in offer.price:
+    #             if vals.price < offer.price:
+    #                 raise UserError(
+    #                     _(
+    #                         "Lower offer cannot be created"
+    #                     )
+    #                 )
+    #     return super(EstatePropertyOffer, self).create(vals)
+
     @api.depends("create_date", "validity")
     def _compute_deadline(self):
         for date in self:
@@ -54,9 +68,6 @@ class EstatePropertyOffer(models.Model):
     def refuse_button(self):
         for record in self:
             if record.property_id.state == "new" or record.property_id.state == "offer":
-                record.property_id.selling_price = "0"
-                record.property_id.buyer_id = ""
-                record.property_id.state = "offer"
                 record.status = "refused"
             else:
                 msg = ("This property is not available")

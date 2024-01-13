@@ -46,6 +46,28 @@ class EstateProperty(models.Model):
         ('positive_expected_price', 'CHECK(expected_price >= 0)', 'A property expected price must be strictly positive'),
         ('positive_selling_price', 'CHECK(selling_price >= 0)', 'A property selling price must be positive')
     ]
+    
+    #only 'in' condition working
+    def unlink(self):
+        for record in self:
+            if record.state in ('offer', 'accept', 'sold'):
+                raise UserError(
+                    _(
+                        "You cannot delete this property. You can "
+                        "cancel it in order to do so."
+                    )
+                )
+        return super(EstateProperty, self).unlink()
+    
+    # @api.model
+    # def unlink(self, vals):
+    #     for record in self:
+    #         if (self.state != 'new') or (self.state != 'canceled'):
+    #             msg = ("This property is not able to delete")
+    #             raise UserError(msg)
+    #         else:
+    #             return super().unlink(vals)
+            
     #specify dependecies
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self): #compute method is private so it should start with _
@@ -84,6 +106,7 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = "0"
             self.garden_orientation = ""
+
     
     @api.constrains('selling_price')
     def selling_price_not_less_than_90(self):
@@ -109,3 +132,4 @@ class EstateProperty(models.Model):
             else:
                 msg = ("This property cannot be canceled")
                 raise UserError(msg)
+            

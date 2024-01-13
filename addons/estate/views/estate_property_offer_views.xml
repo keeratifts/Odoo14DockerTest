@@ -44,6 +44,7 @@
                 Define a new estate property offer
             </p>
         </field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
     </record>
 
 </odoo>

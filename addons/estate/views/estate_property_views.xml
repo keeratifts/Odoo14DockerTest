@@ -54,7 +54,7 @@
                         </page>
                         <page string="Offers">
                             <!-- or operator need to indicate '|' -->
-                            <field name="offer_ids" attrs="{'readonly': ['|',('state', '=', 'offer'),('state', '=', 'sold'),('state', '=', 'offer')]}"/>
+                            <field name="offer_ids" attrs="{'readonly': ['|',('state', '=', 'accept'),('state', '=', 'sold'),('state', '=', 'canceled')]}"/>
                         </page>
                         <page string="Other Info">
                             <group>
