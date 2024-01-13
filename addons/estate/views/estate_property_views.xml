@@ -72,18 +72,18 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Property">
-                <field name = "name"/>
-                <field name = "property_type_id"/>
-                <field name = "postcode"/>
+            <tree string="Property" multi_edit="1" decoration-success="state==('offer')" decoration-bf="state=='accept'" decoration-muted="state=='sold'">
+                <field name = "name" decoration-success="state==('accept')"/>
+                <field name = "property_type_id" decoration-success="state==('accept')"/>
+                <field name = "postcode" decoration-success="state==('accept')"/>
                 <field name = "tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                <field name = "bedrooms"/>
-                <field name = "living_area"/>
-                <field name = "expected_price"/>
-                <field name = "selling_price"/>
-                <field name = "date_availability" optional="hide"/>
-                <field name = "state"/>
-                <field name="best_offer"/>
+                <field name = "bedrooms" decoration-success="state==('accept')"/>
+                <field name = "living_area" decoration-success="state==('accept')"/>
+                <field name = "expected_price" decoration-success="state==('accept')"/>
+                <field name = "selling_price" decoration-success="state==('accept')"/>
+                <field name = "date_availability" optional="hide" decoration-success="state==('accept')"/>
+                <field name = "state" decoration-success="state==('accept')"/>
+                <field name="best_offer" decoration-success="state==('accept')"/>
             </tree>
         </field>
     </record>
