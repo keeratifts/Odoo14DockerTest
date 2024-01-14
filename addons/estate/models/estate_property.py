@@ -132,4 +132,4 @@ class EstateProperty(models.Model):
             else:
                 msg = ("This property cannot be canceled")
                 raise UserError(msg)
-            
+    
