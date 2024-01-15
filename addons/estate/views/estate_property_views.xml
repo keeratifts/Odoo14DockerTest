@@ -68,6 +68,33 @@
         </field>
     </record>
 
+    <record id="estate_property_view_kanban" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <field name="name" />
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <field name = "expected_price" string="Expected Price"/>
+                                <div t-if="('|', record.state.raw_value == 'accept', record.state.raw_value == 'sold')">
+                                    <field name = "selling_price"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id ="estate_property_view_tree" model="ir.ui.view">
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
@@ -114,7 +141,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Define a new estate property
